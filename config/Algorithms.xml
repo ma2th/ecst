@@ -1,0 +1,720 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ecst>
+
+	<!-- This section defines the possible operations. The name attribute defines the value that can be used below and the descirption the HTML string that is displayed 
+		in the GUI. -->
+	<operations>
+		<operation name="additionsSubtractions" description="+, -" descriptionLatex="$+, -$"/>
+		<operation name="multiplications" description="&amp;times;" descriptionLatex="$\times$"/>
+		<operation name="divisions" description="&amp;divide;" descriptionLatex="$\div$"/>
+		<operation name="squareRoots" description="&amp;radic;x" descriptionLatex="$\sqrt{x}$"/>
+		<operation name="exponentialFunctions" description="e&lt;sup&gt;x&lt;/sup&gt;" descriptionLatex="$e^x$"/>
+		<operation name="comparisons" description="&amp;le;" descriptionLatex="$\leq$"/>
+		<operation name="sin" description="sin" descriptionLatex="$\sin$"/>
+		<operation name="cos" description="cos" descriptionLatex="$\cos$"/>
+		<operation name="tanh" description="tanh" descriptionLatex="$\tanh$"/>
+	</operations>
+
+	<!-- This section defines the available feature extraction algorithms. -->
+	<featureExtraction>
+
+		<algorithm name="Energy" class="ecst.algorithm.featureextraction.Energy">
+			<operations additionsSubtractions="1">
+				<multiplier name="linesPerFeatureMinusOne" />
+			</operations>
+
+			<space description="" type="integer">
+				<multiplier name="constant" />
+			</space>
+		</algorithm>
+
+		<algorithm name="FFT" class="ecst.algorithm.featureextraction.FFT">
+			<operations additionsSubtractions="2" multiplications="2">
+				<multiplier name="numberOfRecursions" />
+			</operations>
+
+			<space description="unit square roots (real part)" type="double">
+				<multiplier name="numberOfUnitSquareRoots" />
+			</space>
+			<space description="unit square roots (imaginary) part)" type="double">
+				<multiplier name="numberOfUnitSquareRoots" />
+			</space>
+			<space description="" type="integer">
+				<multiplier name="constant" />
+			</space>
+		</algorithm>
+
+		<algorithm name="Kurtosis" class="ecst.algorithm.featureextraction.Kurtosis">
+			<!-- Start standard deviation -->
+			<!-- Start variance -->
+			<!-- Start mean -->
+			<operations additionsSubtractions="1">
+				<multiplier name="linesPerFeatureMinusOne" />
+			</operations>
+			<operations divisions="1">
+				<multiplier name="constant" />
+			</operations>
+			<!-- End mean -->
+			<operations additionsSubtractions="1">
+				<multiplier name="linesPerFeature" />
+			</operations>
+			<operations additionsSubtractions="1">
+				<multiplier name="linesPerFeatureMinusOne" />
+			</operations>
+			<operations multiplications="1">
+				<multiplier name="linesPerFeature" />
+			</operations>
+			<operations divisions="1">
+				<multiplier name="constant" />
+			</operations>
+			<!-- End variance -->
+			<operations squareRoots="1">
+				<multiplier name="constant" />
+			</operations>
+			<!-- End standard deviation -->
+
+			<operations additionsSubtractions="1">
+				<multiplier name="linesPerFeature" />
+			</operations>
+			<operations additionsSubtractions="1">
+				<multiplier name="linesPerFeatureMinusOne" />
+			</operations>
+			<operations multiplications="3">
+				<multiplier name="linesPerFeature" />
+			</operations>
+			<operations divisions="1">
+				<multiplier name="linesPerFeature" />
+			</operations>
+			<operations divisions="2" additionsSubtractions="5" multiplications="7">
+				<multiplier name="constant" />
+			</operations>
+
+			<space description="" type="integer">
+				<multiplier name="constant" />
+			</space>
+		</algorithm>
+
+		<algorithm name="Maximum" class="ecst.algorithm.featureextraction.Max">
+			<operations comparisons="1">
+				<multiplier name="linesPerFeatureMinusOne" />
+			</operations>
+
+			<space description="" type="integer">
+				<multiplier name="constant" />
+			</space>
+		</algorithm>
+
+		<algorithm name="Mean" class="ecst.algorithm.featureextraction.Mean">
+			<operations additionsSubtractions="1">
+				<multiplier name="linesPerFeatureMinusOne" />
+			</operations>
+			<operations divisions="1">
+				<multiplier name="constant" />
+			</operations>
+
+			<space description="" type="integer">
+				<multiplier name="constant" />
+			</space>
+		</algorithm>
+
+		<algorithm name="Median" class="ecst.algorithm.featureextraction.Median">
+			<operations comparisons="1">
+				<multiplier name="gaussSumOfLinesPerFeatureMinusOne" />
+			</operations>
+
+			<operations dependency="evenLinesPerFeature" additionsSubtractions="1" divisions="1">
+				<multiplier name="constant" />
+			</operations>
+
+			<space description="" type="integer">
+				<multiplier name="constant" />
+			</space>
+		</algorithm>
+
+		<algorithm name="Minimum" class="ecst.algorithm.featureextraction.Min">
+			<operations comparisons="1">
+				<multiplier name="linesPerFeatureMinusOne" />
+			</operations>
+
+			<space description="" type="integer">
+				<multiplier name="constant" />
+			</space>
+		</algorithm>
+
+		<algorithm name="Skewness" class="ecst.algorithm.featureextraction.Skewness">
+			<!-- Start standard deviation -->
+			<!-- Start variance -->
+			<!-- Start mean -->
+			<operations additionsSubtractions="1">
+				<multiplier name="linesPerFeatureMinusOne" />
+			</operations>
+			<operations divisions="1">
+				<multiplier name="constant" />
+			</operations>
+			<!-- End mean -->
+			<operations additionsSubtractions="1">
+				<multiplier name="linesPerFeature" />
+			</operations>
+			<operations additionsSubtractions="1">
+				<multiplier name="linesPerFeatureMinusOne" />
+			</operations>
+			<operations multiplications="1">
+				<multiplier name="linesPerFeature" />
+			</operations>
+			<operations divisions="1">
+				<multiplier name="constant" />
+			</operations>
+			<!-- End variance -->
+			<operations squareRoots="1">
+				<multiplier name="constant" />
+			</operations>
+			<!-- End standard deviation -->
+
+			<operations additionsSubtractions="1">
+				<multiplier name="linesPerFeature" />
+			</operations>
+			<operations additionsSubtractions="1">
+				<multiplier name="linesPerFeatureMinusOne" />
+			</operations>
+			<operations multiplications="2">
+				<multiplier name="linesPerFeature" />
+			</operations>
+			<operations divisions="1">
+				<multiplier name="linesPerFeature" />
+			</operations>
+			<operations divisions="1" additionsSubtractions="2" multiplications="2">
+				<multiplier name="constant" />
+			</operations>
+
+			<space description="" type="integer">
+				<multiplier name="constant" />
+			</space>
+		</algorithm>
+
+		<algorithm name="Standard deviation" class="ecst.algorithm.featureextraction.StandardDeviation">
+			<!-- Start variance -->
+			<!-- Start mean -->
+			<operations additionsSubtractions="1">
+				<multiplier name="linesPerFeatureMinusOne" />
+			</operations>
+			<operations divisions="1">
+				<multiplier name="constant" />
+			</operations>
+			<!-- End mean -->
+
+			<operations additionsSubtractions="1">
+				<multiplier name="linesPerFeature" />
+			</operations>
+			<operations additionsSubtractions="1">
+				<multiplier name="linesPerFeatureMinusOne" />
+			</operations>
+			<operations multiplications="1">
+				<multiplier name="linesPerFeature" />
+			</operations>
+			<operations divisions="1">
+				<multiplier name="constant" />
+			</operations>
+			<!-- End variance -->
+			<operations squareRoots="1">
+				<multiplier name="constant" />
+			</operations>
+
+			<space description="" type="integer">
+				<multiplier name="constant" />
+			</space>
+		</algorithm>
+
+		<algorithm name="Variance" class="ecst.algorithm.featureextraction.Variance">
+			<!-- Start mean -->
+			<operations additionsSubtractions="1">
+				<multiplier name="linesPerFeatureMinusOne" />
+			</operations>
+			<operations divisions="1">
+				<multiplier name="constant" />
+			</operations>
+			<!-- End mean -->
+
+			<operations additionsSubtractions="1">
+				<multiplier name="linesPerFeature" />
+			</operations>
+			<operations additionsSubtractions="1">
+				<multiplier name="linesPerFeatureMinusOne" />
+			</operations>
+			<operations multiplications="1">
+				<multiplier name="linesPerFeature" />
+			</operations>
+			<operations divisions="1">
+				<multiplier name="constant" />
+			</operations>
+
+			<space description="" type="integer">
+				<multiplier name="constant" />
+			</space>
+		</algorithm>
+
+	</featureExtraction>
+
+	<!-- This section defines the available preprocessing algorithms. -->
+	<preprocessing>
+
+		<algorithm name="Normalization" class="ecst.algorithm.preprocessing.NormalizationAdapter">
+			<operations additionsSubtractions="3" multiplications="1" divisions="1">
+				<multiplier name="attributes" />
+			</operations>
+
+			<space description="attribute minimum value" type="double">
+				<multiplier name="attributes" />
+			</space>
+			<space description="attribute maximum value" type="double">
+				<multiplier name="attributes" />
+			</space>
+			<space description="scale factor" type="double">
+				<multiplier name="constant" />
+			</space>
+			<space description="translation constant" type="double">
+				<multiplier name="constant" />
+			</space>
+		</algorithm>
+
+		<algorithm name="Outlier Detection" class="ecst.algorithm.preprocessing.InterquartileRangeAdapter">
+			<operations comparisons="2">
+				<multiplier name="userSelectedAttributes" />
+			</operations>
+
+			<space description="outlier region start" type="double">
+				<multiplier name="userSelectedAttributes" />
+			</space>
+			<space description="outlier region end" type="double">
+				<multiplier name="userSelectedAttributes" />
+			</space>
+		</algorithm>
+
+		<algorithm name="Outlier Detection &amp; Normalization" class="ecst.algorithm.preprocessing.InterquartileRangeAndNormalizationAdapter">
+		</algorithm>
+	</preprocessing>
+
+	<!-- This section defines the available feature selection algorithms. -->
+	<featureSelection>
+
+		<algorithm name="Best First" class="ecst.algorithm.featureselection.BestFirstAdapter" />
+		<algorithm name="Exhaustive" class="ecst.algorithm.featureselection.ExhaustiveSearchAdapter" />
+		<algorithm name="Random" class="ecst.algorithm.featureselection.RandomSearchAdapter" />
+		<algorithm name="Weighted" class="ecst.algorithm.featureselection.WeightedFeatureSelectionAdapter" />
+		<algorithm name="Branch &amp; Bound" class="ecst.algorithm.featureselection.BranchAndBoundAdapter" />
+		<algorithm name="k-Feature Selection" class="ecst.algorithm.featureselection.KFeatureSelectionAdapter" />
+		<algorithm name="InfoGain Ranker" class="ecst.algorithm.featureselection.InfoGainRankerAdapter" />
+		<algorithm name="GainRatio Ranker" class="ecst.algorithm.featureselection.GainRatioRankerAdapter" />
+
+	</featureSelection>
+
+	<!-- This section defines the available classification algorithms. -->
+	<classification>
+
+		<algorithm name="Support Vector Machine" class="ecst.algorithm.classification.SupportVectorMachineAdapter">
+			<!-- Start linear kernel -->
+			<operations dependency="linearKernel" additionsSubtractions="1">
+				<multiplier name="supportVectorMachines" />
+			</operations>
+			<operations dependency="linearKernel" additionsSubtractions="1" multiplications="1">
+				<multiplier name="attributes" />
+				<multiplier name="supportVectorMachines" />
+			</operations>
+			<operations dependency="linearKernel" comparisons="1">
+				<multiplier name="supportVectorMachines" />
+			</operations>
+			<operations dependency="linearKernel" comparisons="1">
+				<multiplier name="classesMinusOne" />
+			</operations>
+
+			<space dependency="linearKernel" description="" type="double">
+				<multiplier name="supportVectorMachines" />
+				<multiplier name="attributes" />
+			</space>
+			<space dependency="linearKernel" description="" type="double">
+				<multiplier name="supportVectorMachines" />
+			</space>
+
+			<!-- Start polynomial kernel -->
+			<!-- Start of all kernels -->
+			<operations dependency="polynomialKernel" additionsSubtractions="1">
+				<multiplier name="supportVectors" />
+			</operations>
+			<operations dependency="polynomialKernel" additionsSubtractions="1">
+				<multiplier name="supportVectorMachines" />
+			</operations>
+			<operations dependency="polynomialKernel" multiplications="2">
+				<multiplier name="supportVectors" />
+			</operations>
+			<operations dependency="polynomialKernel" comparisons="1">
+				<multiplier name="supportVectorMachines" />
+			</operations>
+			<operations dependency="polynomialKernel" comparisons="1">
+				<multiplier name="classesMinusOne" />
+			</operations>
+
+			<space dependency="polynomialKernel" description="" type="double">
+				<multiplier name="supportVectorMachines" />
+			</space>
+			<space dependency="polynomialKernel" description="" type="double">
+				<multiplier name="supportVectors" />
+			</space>
+			<space dependency="polynomialKernel" description="" type="double">
+				<multiplier name="supportVectors" />
+				<multiplier name="attributes" />
+			</space>
+			<space dependency="polynomialKernel" description="" type="integer">
+				<multiplier name="supportVectors" />
+			</space>
+			<!-- End of all kernels -->
+			<operations dependency="polynomialKernel" additionsSubtractions="1">
+				<multiplier name="supportVectors" />
+				<multiplier name="attributes" />
+			</operations>
+			<operations dependency="polynomialKernel" multiplications="1">
+				<multiplier name="supportVectors" />
+				<multiplier name="attributes" />
+			</operations>
+			<operations dependency="polynomialKernel" multiplications="1">
+				<multiplier name="supportVectors" />
+			</operations>
+			<operations dependency="polynomialKernel" multiplications="1">
+				<multiplier name="squareAndMultiplyDegree" />
+				<multiplier name="supportVectors" />
+			</operations>
+
+			<space dependency="polynomialKernel" description="" type="double">
+				<multiplier name="constant" />
+			</space>
+			<space dependency="polynomialKernel" description="" type="double">
+				<multiplier name="constant" />
+			</space>
+			<space dependency="polynomialKernel" description="" type="double">
+				<multiplier name="constant" />
+			</space>
+
+
+			<!-- Start radial basis kernel -->
+			<!-- Start of all kernels -->
+			<operations dependency="radialBasisKernel" additionsSubtractions="1">
+				<multiplier name="supportVectors" />
+			</operations>
+			<operations dependency="radialBasisKernel" additionsSubtractions="1">
+				<multiplier name="supportVectorMachines" />
+			</operations>
+			<operations dependency="radialBasisKernel" multiplications="2">
+				<multiplier name="supportVectors" />
+			</operations>
+			<operations dependency="radialBasisKernel" comparisons="1">
+				<multiplier name="supportVectorMachines" />
+			</operations>
+			<operations dependency="radialBasisKernel" comparisons="1">
+				<multiplier name="classesMinusOne" />
+			</operations>
+
+			<space dependency="radialBasisKernel" description="" type="double">
+				<multiplier name="supportVectorMachines" />
+			</space>
+			<space dependency="radialBasisKernel" description="" type="double">
+				<multiplier name="supportVectors" />
+			</space>
+			<space dependency="radialBasisKernel" description="" type="double">
+				<multiplier name="supportVectors" />
+				<multiplier name="attributes" />
+			</space>
+			<space dependency="radialBasisKernel" description="" type="integer">
+				<multiplier name="supportVectors" />
+			</space>
+			<!-- End of all kernels -->
+			<operations dependency="radialBasisKernel" additionsSubtractions="1">
+				<multiplier name="supportVectors" />
+				<multiplier name="attributes" />
+			</operations>
+			<operations dependency="radialBasisKernel" additionsSubtractions="1">
+				<multiplier name="supportVectors" />
+				<multiplier name="attributesMinusOne" />
+			</operations>
+			<operations dependency="radialBasisKernel" multiplications="1">
+				<multiplier name="supportVectors" />
+				<multiplier name="attributes" />
+			</operations>
+			<operations dependency="radialBasisKernel" multiplications="1">
+				<multiplier name="supportVectors" />
+			</operations>
+			<operations dependency="radialBasisKernel" exponentialFunctions="1">
+				<multiplier name="supportVectors" />
+			</operations>
+
+			<space dependency="radialBasisKernel" description="" type="double">
+				<multiplier name="constant" />
+			</space>
+
+			<!-- Start sigmoid kernel -->
+			<!-- Start of all kernels -->
+			<operations dependency="sigmoidKernel" additionsSubtractions="1">
+				<multiplier name="supportVectors" />
+			</operations>
+			<operations dependency="sigmoidKernel" additionsSubtractions="1">
+				<multiplier name="supportVectorMachines" />
+			</operations>
+			<operations dependency="sigmoidKernel" multiplications="2">
+				<multiplier name="supportVectors" />
+			</operations>
+			<operations dependency="sigmoidKernel" comparisons="1">
+				<multiplier name="supportVectorMachines" />
+			</operations>
+			<operations dependency="sigmoidKernel" comparisons="1">
+				<multiplier name="classesMinusOne" />
+			</operations>
+
+			<space dependency="sigmoidKernel" description="" type="double">
+				<multiplier name="supportVectorMachines" />
+			</space>
+			<space dependency="sigmoidKernel" description="" type="double">
+				<multiplier name="supportVectors" />
+			</space>
+			<space dependency="sigmoidKernel" description="" type="double">
+				<multiplier name="supportVectors" />
+				<multiplier name="attributes" />
+			</space>
+			<space dependency="sigmoidKernel" description="" type="integer">
+				<multiplier name="supportVectors" />
+			</space>
+			<!-- End of all kernels -->
+			<operations dependency="sigmoidKernel" additionsSubtractions="1">
+				<multiplier name="supportVectors" />
+				<multiplier name="attributes" />
+			</operations>
+			<operations dependency="sigmoidKernel" multiplications="1">
+				<multiplier name="supportVectors" />
+				<multiplier name="attributes" />
+			</operations>
+			<operations dependency="sigmoidKernel" multiplications="1">
+				<multiplier name="supportVectors" />
+			</operations>
+			<operations dependency="sigmoidKernel" tanh="1">
+				<multiplier name="supportVectors" />
+			</operations>
+
+			<space dependency="sigmoidKernel" description="" type="double">
+				<multiplier name="constant" />
+			</space>
+			<space dependency="sigmoidKernel" description="" type="double">
+				<multiplier name="constant" />
+			</space>
+
+		</algorithm>
+		
+		<algorithm name="SMO (no complexity estimation)" class="ecst.algorithm.classification.SMOAdapter">
+
+		</algorithm>
+
+		<algorithm name="Naive Bayes" class="ecst.algorithm.classification.NaiveBayesAdapter">
+			<operations additionsSubtractions="1" multiplications="6" divisions="2" exponentialFunctions="1" squareRoots="1">
+				<multiplier name="classes" />
+				<multiplier name="attributes" />
+			</operations>
+			<operations comparisons="1">
+				<multiplier name="classesMinusOne" />
+			</operations>
+
+			<space description="prior probability" type="double">
+				<multiplier name="classes" />
+			</space>
+			<space description="mean of normal density" type="double">
+				<multiplier name="classes" />
+				<multiplier name="attributes" />
+			</space>
+			<space description="standard deviation of normal density" type="double">
+				<multiplier name="classes" />
+				<multiplier name="attributes" />
+			</space>
+		</algorithm>
+
+		<algorithm name="Nearest Neighbor" class="ecst.algorithm.classification.NearestNeighborAdapter">
+			<operations additionsSubtractions="1">
+				<multiplier name="attributesMinusOne" />
+				<multiplier name="instances" />
+			</operations>
+			<operations multiplications="1">
+				<multiplier name="attributes" />
+				<multiplier name="instances" />
+			</operations>
+			<operations squareRoots="1">
+				<multiplier name="instances" />
+			</operations>
+			<operations comparisons="1">
+				<multiplier name="nearestNeighors" />
+				<multiplier name="instancesMinusNearestNeighors" />
+			</operations>
+			<operations additionsSubtractions="1">
+				<multiplier name="nearestNeighors" />
+			</operations>
+			<operations comparisons="1">
+				<multiplier name="classesMinusOne" />
+			</operations>
+
+			<space description="k" type="integer">
+				<multiplier name="constant" />
+			</space>
+			<space description="training instance" type="double">
+				<multiplier name="instances" />
+				<multiplier name="attributes" />
+			</space>
+			<space description="training instance class label" type="integer">
+				<multiplier name="instances" />
+			</space>
+		</algorithm>
+
+		<algorithm name="Linear Regression" class="ecst.algorithm.classification.LinearRegressionAdapter">
+			<operations additionsSubtractions="1" multiplications="1">
+				<multiplier name="attributes" />
+				<multiplier name="classes" />
+			</operations>
+			<!--Comparison whether result of disc. func. negative or bigger that one-->
+			<operations comparisons="2">
+				<multiplier name="classes" />
+			</operations>	
+			<!--Additions of disc. func. results for normalization-->
+			<operations additionsSubtractions="1">
+				<multiplier name="classesMinusOne" />
+			</operations>
+			<!--Divisions of each disc. func. by sum-->
+			<operations divisions="1">
+				<multiplier name="classes" />
+			</operations>
+			<!--Final class decision-->
+			<operations comparisons="1">
+				<multiplier name="classesMinusOne" />
+			</operations>
+			<space description="normal vector" type="double">
+				<multiplier name="attributes" />
+				<multiplier name="classes" />
+			</space>
+			<space description="offset" type="double">
+				<multiplier name="classes" />
+			</space>
+		</algorithm>
+
+		<algorithm name="Multilayer Perceptron" class="ecst.algorithm.classification.MultilayerPerceptronAdapter">
+			<operations multiplications="1">
+				<multiplier name="weights" />
+			</operations>
+			<operations additionsSubtractions="1">
+				<multiplier name="neurons" />
+			</operations>
+			<operations additionsSubtractions="1">
+				<multiplier name="weightsMinusNeurons" />
+			</operations>
+			<operations comparisons="1">
+				<multiplier name="classesMinusOne" />
+			</operations>
+			<operations dependency="nonNumericClassLabels" additionsSubtractions="1" divisions="1" exponentialFunctions="1">
+				<multiplier name="neurons" />
+			</operations>
+			<operations dependency="numericClassLabels" additionsSubtractions="1" divisions="1" exponentialFunctions="1">
+				<multiplier name="neuronsMinusClasses" />
+			</operations>
+
+			<space description="weights" type="double">
+				<multiplier name="weights" />
+			</space>
+			<space description="thresholds" type="double">
+				<multiplier name="neurons" />
+			</space>
+		</algorithm>
+
+		<algorithm name="C4.5" class="ecst.algorithm.classification.C45Adapter">
+			<operations comparisons="1">
+				<multiplier name="treeDepthMinusOne" />
+			</operations>
+
+			<space description="attribute" type="integer">
+				<multiplier name="innerNodes" />
+			</space>
+			<space description="threshold" type="double">
+				<multiplier name="innerNodes" />
+			</space>
+			<space description="class label" type="integer">
+				<multiplier name="leaves" />
+			</space>
+			<space description="node id" type="integer">
+				<multiplier name="nodes" />
+			</space>
+			<space description="parent id" type="integer">
+				<multiplier name="nodes" />
+			</space>
+		</algorithm>
+
+		<algorithm name="AdaBoost M1" class="ecst.algorithm.classification.AdaBoostM1Adapter">
+			<operations additionsSubtractions="1" comparisons="1">
+				<multiplier name="weakLeaners" />
+			</operations>
+			<operations comparisons="1">
+				<multiplier name="classesMinusOne" />
+			</operations>
+
+			<space description="attribute" type="integer">
+				<multiplier name="weakLeaners" />
+			</space>
+			<space description="threshold" type="double">
+				<multiplier name="weakLeaners" />
+			</space>
+			<space description="left class" type="integer">
+				<multiplier name="weakLeaners" />
+			</space>
+			<space description="right class" type="integer">
+				<multiplier name="weakLeaners" />
+			</space>
+			<space description="weight" type="double">
+				<multiplier name="weakLeaners" />
+			</space>
+		</algorithm>
+
+		<algorithm name="PART" class="ecst.algorithm.classification.PARTAdapter">
+			<operations comparisons="1">
+				<multiplier name="comparisons" />
+			</operations>
+
+			<space description="attribute" type="integer">
+				<multiplier name="comparisons" />
+			</space>
+			<space description="threshold" type="double">
+				<multiplier name="comparisons" />
+			</space>
+			<space description="type of comaparison" type="integer">
+				<multiplier name="comparisons" />
+			</space>
+			<space description="class label for rule" type="integer">
+				<multiplier name="rules" />
+			</space>
+		</algorithm>
+
+		<algorithm name="Extern - MATLAB classify" class="ecst.algorithm.classification.ExternalClassifierAdapter">
+			<operations additionsSubtractions="1" multiplications="1">
+				<multiplier name="attributes" />
+			</operations>
+			<operations comparisons="1">
+				<multiplier name="constantExternExample" />
+			</operations>
+
+			<space description="normal vector" type="double">
+				<multiplier name="attributesExternExample" />
+			</space>
+			<space description="offset" type="double">
+				<multiplier name="constant" />
+			</space>
+		</algorithm>
+
+	</classification>
+
+	<!-- This section defines the available evaluation algorithms. -->
+	<evaluation>
+
+		<algorithm name="Cross Validation" class="ecst.algorithm.evaluation.CrossValidationAdapter" />
+		<algorithm name="Training Test Set" class="ecst.algorithm.evaluation.TrainingTestSetAdapter" />
+		<algorithm name="Bootstrapping" class="ecst.algorithm.evaluation.BootstrappingAdapter" />
+		<algorithm name="Leave Subject Out" class="ecst.algorithm.evaluation.LeaveSubjectOutAdapter" />
+
+	</evaluation>
+
+</ecst>
