@@ -19,9 +19,9 @@ With the Embedded Classification Software Toolbox (ECST), we present a solution 
 
 ## Binaries
 
-A binary package can be [downloaded](https://www5.cs.fau.de/research/projects/milife/embedded-classification-software-toolbox-ecst/) at the Pattern Recognition Lab, Friedrich-Alexander-Universität Erlangen-Nürnberg (FAU), Germany.
+A binary package is available at the [Pattern Recognition Lab](https://www5.cs.fau.de/research/projects/milife/embedded-classification-software-toolbox-ecst/), Friedrich-Alexander-Universität Erlangen-Nürnberg (FAU), Germany.
 
-## Citation
+## Citation Request
 
 Please cite this publication when using the ECST
 
