@@ -29,4 +29,4 @@ Matthias Ring, Ulf Jensen, Patrick Kugler, Bjoern M. Eskofier. **Software-based 
  
 More information is available in
 
-Ulf Jensen, Patrick Kugler, Matthias Ring, Bjoern M. Eskofier. **Approaching the accuracy–cost conflict in embedded classification system design**. *Pattern Analysis and Applications*, DOI: 10.1007/s10044-015-0503-1, 2015.
+Ulf Jensen, Patrick Kugler, Matthias Ring, Bjoern M. Eskofier. **Approaching the accuracy–cost conflict in embedded classification system design**. *Pattern Analysis and Applications*, 19(3), pp. 839–855, 2015.
