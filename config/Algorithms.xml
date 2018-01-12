@@ -505,7 +505,11 @@
 		</algorithm>
 		
 		<algorithm name="SMO (no complexity estimation)" class="ecst.algorithm.classification.SMOAdapter">
-
+		
+		</algorithm>
+		
+		<algorithm name="Random Forest (no complexity estimation)" class="ecst.algorithm.classification.RandomForestAdapter">
+		
 		</algorithm>
 
 		<algorithm name="Naive Bayes" class="ecst.algorithm.classification.NaiveBayesAdapter">
