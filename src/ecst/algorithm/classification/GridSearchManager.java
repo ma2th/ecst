@@ -142,9 +142,9 @@ public class GridSearchManager {
 	 * @param classifier
 	 * @throws Exception
 	 */
-	public void saveResult(Classifier classifier) throws Exception {
-		gridSearchXValue = getResult(gridX, classifier);
-		gridSearchYValue = getResult(gridY, classifier);
+	public void saveResult(Classifier classifier, Class<? extends Object> clazz) throws Exception {
+		gridSearchXValue = getResult(gridX, classifier, clazz);
+		gridSearchYValue = getResult(gridY, classifier, clazz);
 	}
 
 	/**
@@ -209,7 +209,7 @@ public class GridSearchManager {
 	 * @return
 	 * @throws Exception
 	 */
-	private Object getResult(Parameter parameter, Classifier classifier) throws Exception {
+	private Object getResult(Parameter parameter, Classifier classifier, Class<? extends Object> clazz) throws Exception {
 		SelectedParameter item = null;
 		String field = null;
 		Method method = null;
@@ -219,7 +219,7 @@ public class GridSearchManager {
 		field = item.getItems().get(item.getSelectedIndex()).getOptionString();
 		field = field.substring(field.indexOf(".") + 1);
 		field = "get" + field.substring(0, 1).toUpperCase() + field.substring(1);
-		method = LibSVM.class.getDeclaredMethod(field, new Class[] {});
+		method = clazz.getDeclaredMethod(field, new Class[] {});
 		result = method.invoke(classifier, new Object[] {});
 
 		return result;

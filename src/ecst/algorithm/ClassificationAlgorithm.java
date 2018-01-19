@@ -101,7 +101,7 @@ public abstract class ClassificationAlgorithm extends WorkPhaseAlgorithm {
 			classifier.buildClassifier(data.getFeatureSelectedInstances());
 			classifier = ((GridSearch) classifier).getBestClassifier();
 			classifier.buildClassifier(data.getFeatureSelectedInstances());
-			gridSearchManager.saveResult(classifier);
+			gridSearchManager.saveResult(classifier, getImplementingClass());
 		} else {
 			classifier = createClassifier();
 			classifier.buildClassifier(data.getFeatureSelectedInstances());

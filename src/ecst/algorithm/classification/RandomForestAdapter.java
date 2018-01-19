@@ -34,11 +34,11 @@ public class RandomForestAdapter extends ClassificationAlgorithm {
 
 	@Override
 	protected void initClassifierParameters() {
-		iterations = new Parameter(100, "Number of iterations", Parameter.TYPE.INTEGER, "-I");
+		iterations = new Parameter(100, "Number of iterations", Parameter.TYPE.INTEGER, "-I", "classifier.numTrees");
 		randomAttributes = new Parameter(0, "Number of attributes to investigate randomly", Parameter.TYPE.INTEGER,
 				"-K");
 		seed = new Parameter(1, "Seed for random number generator", Parameter.TYPE.INTEGER, "-S");
-		maxDepth = new Parameter(0, "Maximum depth of the tree", Parameter.TYPE.INTEGER, "-depth");
+		maxDepth = new Parameter(0, "Maximum depth of the tree", Parameter.TYPE.INTEGER, "-depth", "classifier.maxDepth");
 
 		// WOULD REQUIRE WEKA 3.8
 		// bagSize = new Parameter(100, "Bag size in percent", Parameter.TYPE.INTEGER,
@@ -101,7 +101,7 @@ public class RandomForestAdapter extends ClassificationAlgorithm {
 
 	@Override
 	protected Parameter[] getGridSearchParameters() {
-		return null;
+		return new Parameter[] { iterations, maxDepth };
 	}
 
 	@Override
