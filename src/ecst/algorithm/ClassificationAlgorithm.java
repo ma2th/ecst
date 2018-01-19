@@ -77,8 +77,12 @@ public abstract class ClassificationAlgorithm extends WorkPhaseAlgorithm {
 	public Classifier createClassifier() throws Exception {
 		Classifier classifier = null;
 		
-		classifier = (Classifier) getImplementingClass().newInstance();
-		classifier.setOptions(ParameterUtilities.buildOptionsString(this));
+		if (gridSearchManager != null && (Boolean) gridSearchManager.getEnableGridSearch().getValue()) {
+			classifier = gridSearchManager.createClassifier(getImplementingClass().getCanonicalName(), getParameters());
+		} else {
+			classifier = (Classifier) getImplementingClass().newInstance();
+			classifier.setOptions(ParameterUtilities.buildOptionsString(this));
+		}
 		
 		return classifier;
 	}
@@ -94,24 +98,26 @@ public abstract class ClassificationAlgorithm extends WorkPhaseAlgorithm {
 	 * @throws Exception
 	 */
 	public Classifier classify(PipelineData data) throws Exception {
-		Classifier classifier = null;
+		Classifier trainedClassifier = null;
+		Classifier metaClassifier = null;
 		
 		if (gridSearchManager != null && (Boolean) gridSearchManager.getEnableGridSearch().getValue()) {
-			classifier = gridSearchManager.createClassifier(getImplementingClass().getCanonicalName(), getParameters());
-			classifier.buildClassifier(data.getFeatureSelectedInstances());
-			classifier = ((GridSearch) classifier).getBestClassifier();
-			classifier.buildClassifier(data.getFeatureSelectedInstances());
-			gridSearchManager.saveResult(classifier, getImplementingClass());
+			metaClassifier = createClassifier();
+			metaClassifier.buildClassifier(data.getFeatureSelectedInstances());
+			trainedClassifier = ((GridSearch) metaClassifier).getBestClassifier();
+			trainedClassifier.buildClassifier(data.getFeatureSelectedInstances());
+			gridSearchManager.saveResult(trainedClassifier, getImplementingClass());
 		} else {
-			classifier = createClassifier();
-			classifier.buildClassifier(data.getFeatureSelectedInstances());
+			trainedClassifier = createClassifier();
+			trainedClassifier.buildClassifier(data.getFeatureSelectedInstances());
+			metaClassifier = trainedClassifier; 
 		}
-		modelString = classifier.toString();
-		postprocess(classifier, data);
-		analyzeSystem(data, classifier);
+		modelString = trainedClassifier.toString();
+		postprocess(trainedClassifier, data);
+		analyzeSystem(data, trainedClassifier);
 		saveAnalysis();
 
-		return classifier;
+		return metaClassifier;
 	}
 
 	/**
