@@ -28,9 +28,9 @@ public class AdaBoostM1Adapter extends ClassificationAlgorithm {
 	@Override
 	protected void initClassifierParameters() {
 		seed = new Parameter(1, "Random number seed", Parameter.TYPE.INTEGER, "-S");
-		weightMass = new Parameter(100, "Percentage of weight mass to base training on", Parameter.TYPE.INTEGER, "-P");
+		weightMass = new Parameter(100, "Percentage of weight mass to base training on", Parameter.TYPE.INTEGER, "-P", "classifier.weightThreshold");
 		useResampling = new Parameter(false, "Use resampling for boosting", Parameter.TYPE.BOOLEAN, "-Q");
-		numOfIterations = new Parameter(10, "Number of iterations", Parameter.TYPE.INTEGER, "-I");
+		numOfIterations = new Parameter(10, "Number of iterations", Parameter.TYPE.INTEGER, "-I", "classifier.numIterations");
 	}
 
 	/**
@@ -46,7 +46,7 @@ public class AdaBoostM1Adapter extends ClassificationAlgorithm {
 	 */
 	@Override
 	protected Parameter[] getGridSearchParameters() {
-		return null;
+		return new Parameter[] { weightMass, numOfIterations };
 	}
 
 	/**
@@ -64,7 +64,7 @@ public class AdaBoostM1Adapter extends ClassificationAlgorithm {
 	protected void analyzeSystem(PipelineData data, Classifier classifier) throws Exception {
 		weakLeaners = (Integer) numOfIterations.getValue();
 	}
- 
+
 	/**
 	 * No dependencies for this algoritm.
 	 */

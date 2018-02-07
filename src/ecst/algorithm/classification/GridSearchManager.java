@@ -57,7 +57,8 @@ public class GridSearchManager {
 	/**
 	 * Constructor.
 	 * 
-	 * @param algorithmParameters the grid search paramters.
+	 * @param algorithmParameters
+	 *            the grid search paramters.
 	 */
 	public GridSearchManager(Parameter[] algorithmParameters) {
 		List<SelectedParameterItem> list = null;
@@ -75,8 +76,10 @@ public class GridSearchManager {
 
 		enableGridSearch = new Parameter(false, "Enable grid search", Parameter.TYPE.BOOLEAN, null);
 		expandableGrid = new Parameter(false, "Expandable grid", Parameter.TYPE.BOOLEAN, "-extend-grid");
-		maxGridExtensions = new Parameter(3, "Maximum number of grid extensions", Parameter.TYPE.INTEGER, "-max-grid-extensions");
-		sampleSize = new Parameter(100.0, "Percent of samples to search the initial grid", Parameter.TYPE.DOUBLE, "-sample-size");
+		maxGridExtensions = new Parameter(3, "Maximum number of grid extensions", Parameter.TYPE.INTEGER,
+				"-max-grid-extensions");
+		sampleSize = new Parameter(100.0, "Percent of samples to search the initial grid", Parameter.TYPE.DOUBLE,
+				"-sample-size");
 		seed = new Parameter(1, "Random number seed", Parameter.TYPE.INTEGER, "-S");
 		minX = new Parameter(5.0, "Minimum x", Parameter.TYPE.DOUBLE, "-x-min");
 		maxX = new Parameter(20.0, "Maximum x", Parameter.TYPE.DOUBLE, "-x-max");
@@ -197,8 +200,8 @@ public class GridSearchManager {
 	 * @return
 	 */
 	public Parameter[] getParameters() {
-		return new Parameter[] { gridX, gridY, expandableGrid, evaluation, minX, maxX, stepX, baseX, expressionX, minY, maxY, stepY, baseY,
-				expressionY, seed, maxGridExtensions, sampleSize, traversal };
+		return new Parameter[] { gridX, gridY, expandableGrid, evaluation, minX, maxX, stepX, baseX, expressionX, minY,
+				maxY, stepY, baseY, expressionY, seed, maxGridExtensions, sampleSize, traversal };
 	}
 
 	/**
@@ -209,7 +212,8 @@ public class GridSearchManager {
 	 * @return
 	 * @throws Exception
 	 */
-	private Object getResult(Parameter parameter, Classifier classifier, Class<? extends Object> clazz) throws Exception {
+	private Object getResult(Parameter parameter, Classifier classifier, Class<? extends Object> clazz)
+			throws Exception {
 		SelectedParameter item = null;
 		String field = null;
 		Method method = null;
@@ -219,7 +223,17 @@ public class GridSearchManager {
 		field = item.getItems().get(item.getSelectedIndex()).getOptionString();
 		field = field.substring(field.indexOf(".") + 1);
 		field = "get" + field.substring(0, 1).toUpperCase() + field.substring(1);
-		method = clazz.getDeclaredMethod(field, new Class[] {});
+
+		try {
+			method = clazz.getDeclaredMethod(field, new Class[] {});
+		} catch (Exception e) {
+			System.err.println("Method " + field + " not found on class " + clazz);
+			e.printStackTrace();
+			System.err.println("Searching on superclass(es) instead");		
+			
+			method = clazz.getMethod(field, new Class[] {});
+		}
+		
 		result = method.invoke(classifier, new Object[] {});
 
 		return result;

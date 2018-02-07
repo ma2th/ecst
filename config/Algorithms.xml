@@ -511,6 +511,11 @@
 		<algorithm name="Random Forest (no complexity estimation)" class="ecst.algorithm.classification.RandomForestAdapter">
 		
 		</algorithm>
+		
+		<algorithm name="Logistic Regression (no complexity estimation)" class="ecst.algorithm.classification.LogisticRegressionAdapter">
+		
+		</algorithm>
+		
 
 		<algorithm name="Naive Bayes" class="ecst.algorithm.classification.NaiveBayesAdapter">
 			<operations additionsSubtractions="1" multiplications="6" divisions="2" exponentialFunctions="1" squareRoots="1">
