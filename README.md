@@ -1,6 +1,6 @@
 # Embedded Classification Software Toolbox (ECST)
 
-A software toolbox to train machine learning and classification systems, compare accuracy and performance, and analyze the complexity of the trained system.
+A software toolbox to train machine learning and classification systems, to compare accuracy and performance, and to analyze the complexity of trained systems.
 
 ## Abstract 
 
