@@ -17,16 +17,10 @@ With the Embedded Classification Software Toolbox (ECST), we present a solution 
 * LIBSVM 3.11
 * WEKA 3.6.6
 
-## Binaries
-
-A binary package is available at the [Pattern Recognition Lab](https://www5.cs.fau.de/research/projects/milife/embedded-classification-software-toolbox-ecst/), Friedrich-Alexander-Universität Erlangen-Nürnberg (FAU), Germany.
-
 ## Citation Request
 
-Please cite this publication when using the ECST
+Please cite these publications when using the ECST
 
 Matthias Ring, Ulf Jensen, Patrick Kugler, Bjoern M. Eskofier. **Software-based performance and complexity analysis for the design of embedded classification systems**. In *Proceedings of the 21st International Conference of Pattern Recognition (ICPR 2012)*, Tsukuba, Japan, pp. 2266-2269, 2012.
- 
-More information is available in
 
 Ulf Jensen, Patrick Kugler, Matthias Ring, Bjoern M. Eskofier. **Approaching the accuracy–cost conflict in embedded classification system design**. *Pattern Analysis and Applications*, 19(3), pp. 839–855, 2015.
