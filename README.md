@@ -1,5 +1,7 @@
 # Embedded Classification Software Toolbox (ECST)
 
+A software toolbox to train machine learning and classification systems, compare accuracy and performance, and analyze the complexity of the trained system.
+
 ## Abstract 
 
 Embedded microcontrollers are employed in an increasing number of applications as a target for the implementation of classification systems. This is true, for example, for the fields of sports, automotive, and medical engineering. However, important challenges arise when implementing classification systems on embedded microcontrollers, which is mainly due to limited hardware resources.
